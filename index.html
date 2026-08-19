@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataLens – CSV Analysis Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ========== HEADER ========== -->
+    <header class="app-header glass">
+        <div class="logo">
+            <span class="logo-icon">◈</span>
+            <h1>DataLens</h1>
+            <span class="tagline">Upload → Analyze Dataset</span>
+        </div>
+        <div class="header-actions">
+            <button id="themeToggle" class="btn btn-icon" title="Toggle light/dark mode">🌓</button>
+            <button id="newDatasetBtn" class="btn btn-outline">+ New Dataset</button>
+            <button id="exportCsvBtn" class="btn btn-outline" disabled>⬇ Export CSV</button>
+        </div>
+    </header>
+
+    <!-- ========== DATASET TABS ========== -->
+    <nav id="datasetTabs" class="dataset-tabs" style="display: none;"></nav>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="app-main">
+        <!-- Upload Section -->
+        <section id="uploadSection" class="upload-section">
+            <div class="upload-card glass">
+                <h2>Drop your CSV file</h2>
+                <p>or click to browse</p>
+                <div id="dropZone" class="drop-zone">
+                    <input type="file" id="fileInput" accept=".csv" hidden>
+                    <div class="drop-icon">📊</div>
+                    <p class="drop-text">Drag & drop CSV here</p>
+                    <button id="browseBtn" class="btn btn-primary">Browse File</button>
+                </div>
+                <button id="analyzeBtn" class="btn btn-gradient" disabled>Analyze Dataset</button>
+                <div id="uploadProgress" class="progress-bar" style="display: none;">
+                    <div class="progress-fill"></div>
+                </div>
+                <p class="empty-state-text">Load a CSV file to begin analysis</p>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboardSection" class="dashboard-section" style="display: none;">
+            <div id="statsRow" class="stats-row"></div>
+            <div id="qualityRow" class="quality-row glass">
+                <h3>Data Quality</h3>
+                <div id="qualityChips" class="chips-container"></div>
+            </div>
+            <div id="recommendedCharts" class="charts-grid"></div>
+            <div id="insightsRow" class="insights-row">
+                <h3>Recommended Insights</h3>
+                <div id="insightsCards" class="insights-cards"></div>
+            </div>
+            <section class="data-table-section glass">
+                <div class="table-controls">
+                    <div class="search-box">
+                        <input type="text" id="globalSearch" placeholder="Search all columns..." />
+                    </div>
+                    <div class="filter-controls">
+                        <label for="pageSize">Rows per page:</label>
+                        <select id="pageSize">
+                            <option value="10">10</option>
+                            <option value="25" selected>25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                    <button id="columnToggleBtn" class="btn btn-outline">👁 Columns</button>
+                    <button id="buildChartBtn" class="btn btn-outline">📈 Build Chart</button>
+                </div>
+                <div id="columnVisibilityPanel" class="column-panel glass" style="display: none;"></div>
+                <div class="table-wrapper">
+                    <table id="dataTable" class="data-table">
+                        <thead id="tableHead"></thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <button id="prevPage" class="btn btn-outline">← Prev</button>
+                    <span id="pageInfo">Page 1</span>
+                    <button id="nextPage" class="btn btn-outline">Next →</button>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <!-- ========== CUSTOM CHART MODAL ========== -->
+    <div id="chartModal" class="modal glass" style="display: none;">
+        <div class="modal-content">
+            <span class="modal-close" id="closeChartModal">&times;</span>
+            <h2>Custom Chart Builder</h2>
+            <div class="chart-builder-form">
+                <div class="form-group">
+                    <label>Chart Type</label>
+                    <select id="chartTypeSelect">
+                        <option value="bar">Bar</option>
+                        <option value="line">Line</option>
+                        <option value="pie">Pie / Donut</option>
+                        <option value="scatter">Scatter</option>
+                        <option value="histogram">Histogram</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>X Axis</label>
+                    <select id="xAxisSelect"></select>
+                </div>
+                <div class="form-group">
+                    <label>Y Axis (for bar/line/scatter)</label>
+                    <select id="yAxisSelect"></select>
+                </div>
+                <button id="renderCustomChartBtn" class="btn btn-gradient">Render Chart</button>
+            </div>
+            <div id="customChartContainer" class="custom-chart-container"></div>
+        </div>
+    </div>
+
+    <div id="chartTooltip" class="chart-tooltip" style="display: none;"></div>
+
+    <!-- Load the fixed script -->
+    <script src="app.js"></script>
+</body>
+</html>
