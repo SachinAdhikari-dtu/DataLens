@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DataLens · GitHub README</title>
+  <!-- font & base -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0a0a0f;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+      color: #f0f0f0;
+      line-height: 1.6;
+    }
+
+    /* glassmorphic card – dark, subtle glow */
+    .readme-card {
+      max-width: 1000px;
+      width: 100%;
+      background: rgba(255,255,255,0.02);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 32px;
+      padding: 2.8rem 3rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(57,255,20,0.05);
+      transition: border 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .readme-card:hover {
+      border-color: rgba(57, 255, 20, 0.12);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 30px rgba(57,255,20,0.02);
+    }
+
+    /* header */
+    .header-badge {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 1.8rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      padding-bottom: 1.4rem;
+      flex-wrap: wrap;
+    }
+
+    .logo-icon {
+      font-size: 3.2rem;
+      background: linear-gradient(135deg, #39ff14, #00f0ff, #b026ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 0 12px rgba(57,255,20,0.15));
+    }
+
+    .title-group h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #39ff14, #00f0ff, #b026ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .title-group .sub {
+      font-size: 1rem;
+      color: #a0a0b0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 2px;
+    }
+
+    .title-group .sub span {
+      background: rgba(57,255,20,0.06);
+      padding: 0.1rem 0.8rem;
+      border-radius: 40px;
+      border: 1px solid rgba(57,255,20,0.1);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #b0ffa0;
+    }
+
+    /* one paragraph – deep description */
+    .lead {
+      font-size: 1.2rem;
+      color: #d0d0e0;
+      margin: 1.8rem 0 2.2rem 0;
+      padding-left: 1.2rem;
+      border-left: 3px solid #39ff14;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    .lead strong {
+      color: #f0f0ff;
+      font-weight: 600;
+    }
+
+    /* grid */
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2.2rem;
+      margin: 2.2rem 0 2.5rem 0;
+    }
+
+    .feature-block {
+      background: rgba(255,255,255,0.015);
+      border-radius: 20px;
+      padding: 1.6rem 1.8rem;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .feature-block h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #c0c0d8;
+      letter-spacing: 0.3px;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .feature-block h3 i { font-style: normal; font-size: 1.3rem; }
+
+    .feature-list {
+      list-style: none;
+    }
+
+    .feature-list li {
+      padding: 0.45rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      font-size: 0.95rem;
+      color: #d8d8e8;
+    }
+
+    .feature-list li::before {
+      content: "▹";
+      color: #39ff14;
+      font-weight: 400;
+      font-size: 1rem;
+    }
+
+    .tech-badge-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 0.6rem;
+    }
+
+    .tech-badge {
+      background: rgba(0,240,255,0.04);
+      border: 1px solid rgba(0,240,255,0.08);
+      padding: 0.2rem 0.9rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      color: #b0d0e8;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+
+    .tech-badge.green { border-color: rgba(57,255,20,0.12); color: #b0f0b0; background: rgba(57,255,20,0.02); }
+    .tech-badge.pink { border-color: rgba(255,46,136,0.12); color: #f0b0c8; background: rgba(255,46,136,0.02); }
+    .tech-badge.gold { border-color: rgba(255,190,11,0.12); color: #f0d080; background: rgba(255,190,11,0.02); }
+
+    .code-snip {
+      background: #0d0d14;
+      border-radius: 14px;
+      padding: 0.6rem 1.2rem;
+      margin: 0.4rem 0 0.2rem 0;
+      border: 1px solid rgba(255,255,255,0.04);
+      font-family: 'Inter', monospace;
+      font-size: 0.82rem;
+      color: #b0c8d8;
+      display: inline-block;
+    }
+
+    .code-snip span { color: #39ff14; }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, rgba(57,255,20,0.08), rgba(0,240,255,0.08), transparent);
+      margin: 2rem 0 1.6rem 0;
+    }
+
+    .footer-note {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: #80809a;
+    }
+
+    .footer-note .key-hint {
+      background: rgba(255,255,255,0.015);
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      border: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.8rem;
+    }
+
+    .footer-note .key-hint kbd {
+      background: #181820;
+      padding: 0.1rem 0.6rem;
+      border-radius: 6px;
+      color: #d0d0e0;
+      font-weight: 600;
+      border: 1px solid #2a2a36;
+      margin: 0 2px;
+    }
+
+    /* responsive */
+    @media (max-width: 700px) {
+      .readme-card { padding: 1.8rem 1.2rem; }
+      .grid-2col { grid-template-columns: 1fr; gap: 1.5rem; }
+      .header-badge { flex-wrap: wrap; }
+      .title-group h1 { font-size: 2rem; }
+      .lead { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="readme-card">
+
+    <!-- header -->
+    <div class="header-badge">
+      <div class="logo-icon">◈</div>
+      <div class="title-group">
+        <h1>DataLens</h1>
+        <div class="sub">
+          CSV Analysis Dashboard
+          <span>v1.0</span>
+          <span style="background: rgba(0,240,255,0.04); border-color: rgba(0,240,255,0.08);">client‑side · zero deps</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- one‑paragraph (full description) -->
+    <div class="lead">
+      <strong>DataLens</strong> is a lightweight, privacy‑first CSV analysis dashboard that runs entirely in your browser. 
+      Upload a CSV file and instantly explore statistics, quality warnings, interactive SVG charts (bar, line, pie, scatter), 
+      a fully searchable and sortable table, plus intelligent insights — all wrapped in a polished glassmorphic interface 
+      with dark/light theme support. No server, no data sharing, just instant analytics.
+    </div>
+
+    <!-- two‑column: features + tech / shortcuts -->
+    <div class="grid-2col">
+      <!-- left: features -->
+      <div class="feature-block">
+        <h3><i>⚡</i> Core capabilities</h3>
+        <ul class="feature-list">
+          <li>Drag‑and‑drop CSV parsing (quoted fields, comma‑separated)</li>
+          <li>Auto‑statistics: row count, missing %, duplicates, column types</li>
+          <li>Quality warnings (high nulls, constant columns, unique IDs)</li>
+          <li>4 recommended charts: bar, line, pie, scatter – rendered as SVG</li>
+          <li>Global search + per‑column filters &amp; sortable table</li>
+          <li>Custom chart builder with X/Y axis selection</li>
+          <li>Export visible/filtered data as CSV</li>
+          <li>Persistent theme preference (dark / light) via localStorage</li>
+        </ul>
+      </div>
+
+      <!-- right: stack + shortcuts + usage -->
+      <div class="feature-block">
+        <h3><i>🧩</i> Stack &amp; UX</h3>
+        <div style="margin-bottom: 1rem;">
+          <div style="font-size:0.9rem; color:#b0b0c8; margin-bottom: 0.3rem;">Built with</div>
+          <div class="tech-badge-group">
+            <span class="tech-badge green">Vanilla JS</span>
+            <span class="tech-badge">CSS3</span>
+            <span class="tech-badge gold">HTML5</span>
+            <span class="tech-badge pink">SVG charts</span>
+            <span class="tech-badge">localStorage</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 1rem;">
+          <div style="font-size:0.9rem; color:#b0b0c8; margin-bottom: 0.3rem;">Keyboard shortcuts</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+            <span class="code-snip"><span>⌘</span>+<span>K</span>  → focus search</span>
+            <span class="code-snip"><span>ESC</span>  → close modal</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.4rem;">
+          <div style="font-size:0.9rem; color:#b0b0c8; margin-bottom: 0.2rem;">Dataset memory</div>
+          <div style="font-size:0.85rem; color:#a0a0b8;">Multiple datasets · tabbed switching · no upload to server</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- quick start / usage hint -->
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem 1.5rem; background: rgba(57,255,20,0.01); border-radius: 18px; padding: 0.8rem 1.4rem; border: 1px solid rgba(57,255,20,0.04);">
+      <span style="font-weight: 500; color: #c0c0d8; display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 1.2rem;">🚀</span> Quick start
+      </span>
+      <span style="color: #b0b0c8; font-size: 0.9rem;">Open <code style="background: #0d0d14; padding: 0.1rem 0.6rem; border-radius: 8px; border: 1px solid #222; color: #d0d0e0;">index.html</code> → drag a CSV → explore</span>
+      <span style="color: #60607a; font-size: 0.8rem; margin-left: auto;">no build, no install</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- footer with meta -->
+    <div class="footer-note">
+      <div>
+        <span style="background: rgba(255,255,255,0.02); padding: 0.2rem 1rem; border-radius: 40px; border: 1px solid rgba(255,255,255,0.04); font-size:0.8rem;">
+          📁 MIT · 2026
+        </span>
+      </div>
+      <div class="key-hint">
+        <kbd>Ctrl</kbd>+<kbd>K</kbd> search · <kbd>Esc</kbd> close · theme toggle 🌓
+      </div>
+      <div style="display: flex; gap: 6px; font-size:0.85rem; color:#60607a;">
+        <span>#csv</span> <span>#analytics</span> <span>#vanillajs</span>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
